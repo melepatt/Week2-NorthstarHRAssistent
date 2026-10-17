@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "northstar-hr-assistant"
+version = "0.1.0"
+description = "Grounded HR policy question-answering for Northstar Labs"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "chromadb",
+  "httpx",
+  "langchain",
+  "langchain-chroma",
+  "langchain-text-splitters",
+  "langgraph",
+  "pymupdf",
+  "rank-bm25",
+  "reportlab",
+  "streamlit",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest>=8.3",
+  "ruff>=0.14",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/northstar_rag"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+testpaths = ["tests"]
+markers = [
+  "live: requires Nebius credentials and explicit opt-in",
+]
+filterwarnings = [
+  "ignore:builtin type SwigPyPacked has no __module__ attribute:DeprecationWarning",
+  "ignore:builtin type SwigPyObject has no __module__ attribute:DeprecationWarning",
+  "ignore:builtin type swigvarlink has no __module__ attribute:DeprecationWarning",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.format]
+quote-style = "double"

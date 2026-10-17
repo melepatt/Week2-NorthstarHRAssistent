@@ -1,0 +1,212 @@
+[
+  {
+    "id": "final-direct-benefit-start",
+    "category": "direct",
+    "question": "When does benefit coverage generally start for a newly eligible employee?",
+    "answerable": true,
+    "expected_points": [
+      "Coverage generally begins on the first day of the calendar month after the employee completes 30 calendar days of employment.",
+      "If the 30th day falls on the first day of a month, coverage begins on the first day of the following month.",
+      "The enrollment system displays the actual coverage date."
+    ],
+    "expected_document_ids": [
+      "benefits-guide"
+    ],
+    "notes": "Direct retrieval of the benefit waiting-period rule and its exception."
+  },
+  {
+    "id": "final-direct-annual-pto",
+    "category": "direct",
+    "question": "How many paid time off days does a regular full-time employee receive each year?",
+    "answerable": true,
+    "expected_points": [
+      "Regular full-time employees receive 20 paid time off days per calendar year.",
+      "New-hire and final-year allocations are prorated by full calendar month."
+    ],
+    "expected_document_ids": [
+      "leave-and-time-off"
+    ],
+    "notes": "Direct retrieval of the annual paid-time-off allocation."
+  },
+  {
+    "id": "final-direct-incident-deadline",
+    "category": "direct",
+    "question": "How quickly must a suspected security incident be reported?",
+    "answerable": true,
+    "expected_points": [
+      "A suspected or confirmed security incident must be reported to Information Security within one hour of discovery.",
+      "Employees should report quickly even when all facts are not known and should not investigate independently."
+    ],
+    "expected_document_ids": [
+      "remote-work-and-information-security"
+    ],
+    "notes": "Direct retrieval of the incident-reporting deadline."
+  },
+  {
+    "id": "final-direct-lodging-cap",
+    "category": "direct",
+    "question": "What is the standard cap for domestic lodging on a business trip?",
+    "answerable": true,
+    "expected_points": [
+      "The standard domestic lodging cap is $250 per night before taxes and mandatory fees.",
+      "A higher rate requires advance manager approval and a documented business reason.",
+      "The cap does not apply to a conference hotel booked within an approved event room block when the event is identified in the expense report."
+    ],
+    "expected_document_ids": [
+      "travel-and-expense"
+    ],
+    "notes": "Direct retrieval of the lodging limit and material exceptions."
+  },
+  {
+    "id": "final-direct-vendor-gift",
+    "category": "direct",
+    "question": "May an employee accept a $75 gift from a vendor?",
+    "answerable": true,
+    "expected_points": [
+      "A lawful noncash business gift may be accepted without special approval only when its value is $50 or less and the other policy conditions are met.",
+      "A gift above $50 requires advance written approval from Legal.",
+      "Cash and cash-equivalent gifts are prohibited regardless of value."
+    ],
+    "expected_document_ids": [
+      "code-of-conduct-and-reporting"
+    ],
+    "notes": "Direct retrieval of the vendor-gift threshold and prohibited forms."
+  },
+  {
+    "id": "final-direct-collaboration-hours",
+    "category": "direct",
+    "question": "What are Northstar Labs' normal collaboration hours?",
+    "answerable": true,
+    "expected_points": [
+      "Normal collaboration hours are 10:00 a.m. through 3:00 p.m. Eastern Time, Monday through Friday, excluding company holidays.",
+      "Employees are expected to be reachable unless they have approved leave, an agreed schedule, or an emergency."
+    ],
+    "expected_document_ids": [
+      "employee-handbook"
+    ],
+    "notes": "Direct retrieval of shared availability hours and exceptions."
+  },
+  {
+    "id": "final-cross-parental-benefits",
+    "category": "cross_document",
+    "question": "How long is paid parental leave, who is eligible, and what happens to active benefits during it?",
+    "answerable": true,
+    "expected_points": [
+      "An eligible employee may receive up to 12 weeks of paid parental leave for birth, adoption, or placement of a child.",
+      "Eligibility requires 12 completed months of employment as of the leave start date.",
+      "Active benefits continue on the same terms as for an actively working employee during approved paid parental leave.",
+      "The employee must continue any required employee contributions."
+    ],
+    "expected_document_ids": [
+      "leave-and-time-off",
+      "benefits-guide"
+    ],
+    "notes": "Requires leave eligibility facts and the benefits-continuation rule."
+  },
+  {
+    "id": "final-cross-secure-travel",
+    "category": "cross_document",
+    "question": "What security and expense rules apply when working with company data during approved business travel?",
+    "answerable": true,
+    "expected_points": [
+      "Remote-work security requirements apply when work is performed during business travel.",
+      "Employees must use approved security controls and protect confidential data from unauthorized devices, accounts, storage, and viewers.",
+      "Approved business costs for secure connectivity or required adapters may be reimbursed when documented.",
+      "A lost device or suspected disclosure must be reported to Information Security within one hour; an expense report is not an incident report."
+    ],
+    "expected_document_ids": [
+      "remote-work-and-information-security",
+      "travel-and-expense"
+    ],
+    "notes": "Requires both information-security controls and travel reimbursement/reporting rules."
+  },
+  {
+    "id": "final-cross-remote-retaliation",
+    "category": "cross_document",
+    "question": "If I report suspected retaliation while working remotely, what protection and reporting options apply?",
+    "answerable": true,
+    "expected_points": [
+      "Northstar Labs prohibits retaliation against a person who raises a good-faith concern or participates in an investigation.",
+      "Non-retaliation applies when a concern arises during remote work.",
+      "Suspected retaliation should be reported immediately through any reporting channel and is reviewed separately from the underlying concern.",
+      "Remote work does not reduce the employee's obligation to protect information and use secure company systems when making or preserving a report."
+    ],
+    "expected_document_ids": [
+      "code-of-conduct-and-reporting",
+      "remote-work-and-information-security"
+    ],
+    "notes": "Requires the conduct policy's protection and remote-work security context."
+  },
+  {
+    "id": "final-ambiguous-other-state",
+    "category": "ambiguous",
+    "question": "Can I work from another state?",
+    "answerable": true,
+    "expected_points": [
+      "The answer depends on how long the employee will work from the other state and whether that state is already approved.",
+      "More than 30 calendar days in a different state requires advance written approval from People Operations and the employee's manager.",
+      "Short-term work within the approved state requires manager awareness and continued security and availability compliance."
+    ],
+    "expected_document_ids": [
+      "remote-work-and-information-security"
+    ],
+    "notes": "The question omits duration and approved-location status, which control the approval path."
+  },
+  {
+    "id": "final-ambiguous-dinner",
+    "category": "ambiguous",
+    "question": "Can I expense dinner?",
+    "answerable": true,
+    "expected_points": [
+      "Reimbursement depends on the business context rather than the fact that work was discussed.",
+      "A meal during approved overnight business travel may qualify within the $75 daily cap.",
+      "An ordinary meal at the primary work location, a personal dinner, or a meal during personal travel is not reimbursable on that basis."
+    ],
+    "expected_document_ids": [
+      "travel-and-expense"
+    ],
+    "notes": "The question omits the travel and business context needed for reimbursement."
+  },
+  {
+    "id": "final-ambiguous-tomorrow-off",
+    "category": "ambiguous",
+    "question": "Can I take tomorrow off?",
+    "answerable": true,
+    "expected_points": [
+      "The employee must identify the reason or leave category, any relevant available balance, and whether the need is urgent.",
+      "Planned paid time off requires recorded manager approval before it is treated as approved.",
+      "An unexpected illness follows the sick-leave notification process, and a possible protected-leave request requires People Operations review."
+    ],
+    "expected_document_ids": [
+      "leave-and-time-off"
+    ],
+    "notes": "The question omits the leave category, urgency, balance, and approval status."
+  },
+  {
+    "id": "final-unanswerable-retirement-balance",
+    "category": "unanswerable",
+    "question": "What is the current balance in my personal retirement account?",
+    "answerable": false,
+    "expected_points": [],
+    "expected_document_ids": [],
+    "notes": "The corpus describes the retirement plan but contains no individual account data."
+  },
+  {
+    "id": "final-unanswerable-tax-withholding",
+    "category": "unanswerable",
+    "question": "Exactly how much federal income tax will be withheld from my next paycheck?",
+    "answerable": false,
+    "expected_points": [],
+    "expected_document_ids": [],
+    "notes": "The corpus contains no individual payroll or tax-election data and does not provide tax advice."
+  },
+  {
+    "id": "final-unanswerable-final-pay",
+    "category": "unanswerable",
+    "question": "What is the final-pay deadline for an employee leaving the company in my state?",
+    "answerable": false,
+    "expected_points": [],
+    "expected_document_ids": [],
+    "notes": "The corpus does not state jurisdiction-specific final-pay deadlines or identify the employee's state."
+  }
+]

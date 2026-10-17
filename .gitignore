@@ -1,0 +1,13 @@
+.env
+.venv/
+.chroma/
+data/index/
+evaluation/runs/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+tmp/
+.DS_Store

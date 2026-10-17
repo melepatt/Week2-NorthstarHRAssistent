@@ -1,0 +1,67 @@
+[
+  {
+    "id": "dev-direct-benefit-coverage",
+    "category": "direct",
+    "question": "After a new full-time employee completes 30 days of employment, when does benefit coverage generally begin?",
+    "answerable": true,
+    "expected_points": [
+      "Coverage generally begins on the first day of the calendar month after 30 calendar days of employment are completed.",
+      "If day 30 is the first day of a month, coverage begins on the first day of the following month.",
+      "The enrollment system displays the employee's actual coverage date."
+    ],
+    "expected_document_ids": [
+      "benefits-guide"
+    ],
+    "notes": "Development-only direct fact used to observe answerable-score behavior."
+  },
+  {
+    "id": "dev-cross-parental-contributions",
+    "category": "cross_document",
+    "question": "What service requirement and employee-contribution condition apply to paid parental leave and continued active benefits?",
+    "answerable": true,
+    "expected_points": [
+      "Paid parental leave eligibility requires 12 completed months of employment as of the leave start date.",
+      "Approved paid parental leave provides up to 12 weeks.",
+      "Active benefits continue on the same terms as for an actively working employee during the paid leave.",
+      "The employee must continue any required employee contributions."
+    ],
+    "expected_document_ids": [
+      "leave-and-time-off",
+      "benefits-guide"
+    ],
+    "notes": "Development-only cross-document item used to observe multi-source retrieval scores."
+  },
+  {
+    "id": "dev-ambiguous-remote-location",
+    "category": "ambiguous",
+    "question": "May I work from a different state for six weeks while staying with family?",
+    "answerable": true,
+    "expected_points": [
+      "Working from a different state for more than 30 calendar days requires advance written approval from People Operations and the employee's manager.",
+      "Remote-work eligibility also depends on job duties, team coverage, data restrictions, performance, and a safe and secure workspace.",
+      "Personal travel does not make lodging, meals, transportation, or connectivity reimbursable."
+    ],
+    "expected_document_ids": [
+      "remote-work-and-information-security"
+    ],
+    "notes": "Development-only qualified request with a stated duration and an approval condition."
+  },
+  {
+    "id": "dev-unanswerable-cafeteria",
+    "category": "unanswerable",
+    "question": "What is my monthly company cafeteria subsidy?",
+    "answerable": false,
+    "expected_points": [],
+    "expected_document_ids": [],
+    "notes": "Unsupported topic used to observe refusal-score behavior."
+  },
+  {
+    "id": "dev-unanswerable-performance-rating",
+    "category": "unanswerable",
+    "question": "What performance rating did my manager give me this quarter?",
+    "answerable": false,
+    "expected_points": [],
+    "expected_document_ids": [],
+    "notes": "Unsupported individual employee data used to observe refusal-score behavior."
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "document_id": "employee-handbook",
+    "title": "Employee Handbook",
+    "source_file": "employee-handbook.md",
+    "output_file": "employee-handbook.pdf",
+    "version": "2026.10-draft"
+  },
+  {
+    "document_id": "benefits-guide",
+    "title": "Benefits Guide",
+    "source_file": "benefits-guide.md",
+    "output_file": "benefits-guide.pdf",
+    "version": "2026.10-draft"
+  },
+  {
+    "document_id": "leave-and-time-off",
+    "title": "Leave and Time Off Policy",
+    "source_file": "leave-and-time-off.md",
+    "output_file": "leave-and-time-off.pdf",
+    "version": "2026.10-draft"
+  },
+  {
+    "document_id": "remote-work-and-information-security",
+    "title": "Remote Work and Information Security Policy",
+    "source_file": "remote-work-and-information-security.md",
+    "output_file": "remote-work-and-information-security.pdf",
+    "version": "2026.10-draft"
+  },
+  {
+    "document_id": "travel-and-expense",
+    "title": "Travel and Expense Policy",
+    "source_file": "travel-and-expense.md",
+    "output_file": "travel-and-expense.pdf",
+    "version": "2026.10-draft"
+  },
+  {
+    "document_id": "code-of-conduct-and-reporting",
+    "title": "Code of Conduct and Reporting Policy",
+    "source_file": "code-of-conduct-and-reporting.md",
+    "output_file": "code-of-conduct-and-reporting.pdf",
+    "version": "2026.10-draft"
+  }
+]
