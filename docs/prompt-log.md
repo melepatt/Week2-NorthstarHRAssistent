@@ -62,6 +62,25 @@ verification:
     one over-broad conditional conclusion; explicitly prohibit reversing policy direction or
     changing `may` into `must` or `may qualify` into `only if`.
 
+## Iteration outcomes
+
+| Iteration | Evidence that triggered it | Result and lesson |
+| --- | --- | --- |
+| Initial answer prompt to `northstar-answer-v2` | A live multi-document answer placed two sources inside one citation bracket, which the exact citation validator could not safely interpret. | Required one title/page pair per bracket and adjacent brackets for multiple sources. Prompt syntax and validation now agree. |
+| `northstar-answer-v2` to `northstar-answer-v3` | Manual review found a reversed obligation and an answer that strengthened a conditional rule. | Added explicit controls for direction and modal strength. Grounding requires preserving what the source means, not merely using its vocabulary. |
+| Public reranker to embedding-similarity reranking | The originally considered public reranking model was unavailable in the validated provider catalog. | Reused the approved Nebius embedding model and cosine similarity. Model availability is now checked before indexing or evaluation. |
+| Static `0.35` gate to development calibration | A hand-selected threshold had no measured relationship to answerable and unanswerable examples. | Calibrated only on the five-question development partition and kept the final questions locked. |
+| Stable `0.802` default to a later approximately `0.846` experiment | The latest development run contained an answerable item with no usable score; the stricter boundary then caused four false refusals in the final run. | Development-set health must be checked before promoting a threshold. Retrieval recall and confidence-gate behavior must be reported separately. |
+
+## Development tooling and verification
+
+Codex was used inside the development environment for requirements decomposition, architecture and
+test review, implementation assistance, failure analysis, and documentation drafting. It did not
+approve policies or evaluation claims. The developer retained each material decision and verified
+the result through unit tests, lint and formatting checks, provider-backed model validation,
+reproducible corpus generation, fixed-set evaluation, and visual inspection of generated documents
+and the Streamlit interface.
+
 ## Change-control rule
 
 Changes to either prompt, model IDs, retrieval limits, chunking, threshold, or corpus content require

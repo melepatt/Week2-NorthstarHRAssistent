@@ -16,7 +16,6 @@ EXAMPLE_QUESTIONS = (
     "How many paid time off days do full-time employees receive?",
     "When do benefits begin for a newly eligible employee?",
     "Can I work from another state?",
-    "What is my retirement balance?",
 )
 
 

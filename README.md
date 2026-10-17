@@ -15,9 +15,28 @@ receive a deterministic refusal and are directed to People Operations.
 - The complete offline implementation and test suite are available.
 - The policy corpus contains synthetic company policy text and no real employee data.
 - Live Nebius model validation, indexing, and the fixed provider-backed evaluation have been run.
-- The latest final run met retrieval, faithfulness, refusal, and citation targets. It retained one
-  conservative false refusal and exceeded the p95 latency target; see the evaluation report.
+- The latest final run met the automated retrieval, faithfulness, unanswerable-refusal, and citation
+  targets. It retained four confidence-gate false refusals, exceeded the p95 latency target, and
+  still requires run-specific manual review; see the evaluation report.
 - Draft policy content must not be presented as effective policy.
+
+## Delivery package
+
+| Deliverable | Location |
+| --- | --- |
+| Working Streamlit bot | `app.py` with the setup and run instructions below |
+| Six-document HR policy corpus | `data/source/`, `data/source/manifest.json`, and `data/policies/` |
+| Architecture, dataset, ingestion, retrieval, iterations, and learnings | [`docs/project-documentation.md`](docs/project-documentation.md) |
+| Prompts, AI-assisted engineering decisions, and iteration history | [`docs/prompt-log.md`](docs/prompt-log.md) |
+| Fixed 15-question results, retrieval scores, and failure analysis | [`docs/evaluation-report.md`](docs/evaluation-report.md) |
+| Machine-readable final-run evidence | `evaluation/runs/final/20261017T161604Z-final/` |
+| Under-five-minute stakeholder walkthrough | [`docs/video-demo-script.md`](docs/video-demo-script.md) |
+
+Before external handoff, record the walkthrough in five minutes or less and provide either a
+dedicated repository link or a sanitized source archive. Include the evaluation report with that
+handoff, and verify that `.env`, credentials, local indexes, caches, and unreviewed request logs are
+excluded. The walkthrough guide is complete, but the recording and dedicated distribution link are
+separate delivery artifacts and are not stored in this repository.
 
 ## Prerequisites
 
@@ -120,16 +139,23 @@ Use only the five development questions to select the confidence threshold:
 python scripts/evaluate.py --dataset development --output-dir evaluation/runs/development
 ```
 
-Copy the reported calibrated value into the final command without changing the fixed 15-question
-set:
+Before accepting the reported value, verify that every answerable development question retrieved
+usable evidence and that the answerable and unanswerable score distributions are credible. A corpus
+gap or empty score on an answerable development item invalidates that calibration for promotion.
+
+Copy a reviewed calibrated value into the final command without changing the fixed 15-question set.
+The command below uses the stable `0.802` operational default:
 
 ```bash
 python scripts/evaluate.py --dataset final --output-dir evaluation/runs/final --threshold 0.802
 ```
 
-Replace `0.802` if a fresh development run reports a different calibrated value. The evaluator writes timestamped JSON, CSV,
-and Markdown artifacts and refreshes `docs/evaluation-report.md`. Manually verify faithfulness
-against the cited PDF pages before accepting the report.
+Replace `0.802` only when a healthy development run supports a different value. The evaluator writes
+timestamped JSON, CSV, and Markdown artifacts and refreshes `docs/evaluation-report.md`. The current
+run format does not serialize the selected threshold, so record it in the reviewed report until that
+metadata gap is corrected. After every final run, restore the report's methodology and explanatory
+analysis if the generated summary replaced them, then manually verify each answer against its
+expected points and cited PDF pages.
 
 ## Architecture
 

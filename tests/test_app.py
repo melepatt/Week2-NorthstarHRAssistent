@@ -72,7 +72,7 @@ def all_visible_text(app: AppTest) -> str:
     return "\n".join(str(element.value) for group in element_types for element in group)
 
 
-def test_title_scope_and_four_examples_render() -> None:
+def test_title_scope_and_three_supported_examples_render() -> None:
     app = run_app()
     text = all_visible_text(app)
 
@@ -81,7 +81,7 @@ def test_title_scope_and_four_examples_render() -> None:
     assert "How many paid time off days" in text
     assert "When do benefits begin" in text
     assert "Can I work from another state" in text
-    assert "What is my retirement balance" in text
+    assert "What is my retirement balance" not in text
 
 
 def test_whitespace_input_does_not_call_graph() -> None:

@@ -16,6 +16,13 @@ The corpus is synthetic and contains no personal employee information. Individua
 accommodation, investigation, exception, medical, tax, investment, and legal decisions remain with
 qualified internal teams or external advisers.
 
+## Project primer
+
+For Northstar Labs employees, this Streamlit-based RAG assistant answers factual, conditional, and
+cross-policy HR questions using six controlled policy PDFs, returning page-cited answers or safe
+refusals while targeting at least 85 percent retrieval recall, 95 percent faithfulness, and 100
+percent citation and unanswerable-question refusal accuracy.
+
 ## Scope and success criteria
 
 The application covers:
@@ -34,6 +41,33 @@ Provider errors must return safe user text without credentials or raw provider d
 The final quality targets are retrieval recall@4 of at least 85 percent, faithfulness of at least 95
 percent, 100 percent refusal accuracy on unanswerable questions, 100 percent citation validity and
 coverage, and end-to-end p95 latency no greater than eight seconds.
+
+## RAG framework
+
+| Field | Project decision |
+| --- | --- |
+| **Use case** | Northstar Labs employees use an internal Streamlit chat interface to ask factual, conditional, and cross-document questions about company HR policies. |
+| **Corpus** | The corpus contains six synthetic, English-language HR policies maintained as Markdown and published as controlled PDFs. People Operations owns the source content, with Legal responsible for policy review. |
+| **Ingestion + cleaning** | A manifest-controlled process generates deterministic PDFs, and PyMuPDF extracts text page by page. Exact headers and footers are removed, and whitespace is normalized without altering policy wording, punctuation, or numbers. |
+| **Ingestion + freshness** | The corpus is rebuilt and evaluated after every approved policy change, with a target of updating the index within one business day. People Operations also performs a quarterly reconciliation against the policy register. |
+| **Chunking + embedding** | Documents are split within page and section boundaries into chunks targeting 600 tokens with a 90-token overlap, preserving headings and citation metadata. Nebius `Qwen/Qwen3-Embedding-8B` generates the embeddings because it supports both semantic retrieval and consistent cosine-similarity reranking. |
+| **Retrieve** | The system uses hybrid retrieval with persistent Chroma dense search and BM25 lexical search, retrieving up to eight results from each. Reciprocal-rank fusion combines them, the best ten are reranked, and the top four are supplied as answer evidence. |
+
+### Dataset inventory
+
+The editable source files live under `data/source/` and are registered in
+`data/source/manifest.json`. The six generated PDFs live under `data/policies/`. The current local
+index manifest records 68 chunks and the embedding model used to build them. The corpus contains
+only fabricated Northstar Labs policy text; it does not contain employee records or other personal
+data.
+
+The evaluation data is separate from the policy corpus:
+
+- `evaluation/development_questions.json` contains five questions used only for confidence-threshold
+  calibration;
+- `evaluation/questions.json` contains the fixed 15-question final set; and
+- `evaluation/final_manual_reviews.json` contains reviewer notes tied to the run that produced those
+  notes and must not be silently reused for a newer run.
 
 ## System architecture
 
@@ -106,6 +140,50 @@ Provider-backed model validation, indexing, development calibration, and the fix
 have been completed. The stable report records measured outcomes and known failures; unit-test
 fixtures are never presented as provider-backed results.
 
+The final question mix deliberately stresses four behaviors:
+
+| Question type | Count | Intended behavior |
+| --- | ---: | --- |
+| Direct | 6 | Retrieve one controlling policy and answer the requested fact with its qualifications. |
+| Cross-document | 3 | Combine evidence from two or more policies without merging or losing conditions. |
+| Ambiguous | 3 | Identify missing facts and give a conditional policy answer when evidence is strong enough. |
+| Unanswerable | 3 | Refuse questions requiring personal data or jurisdiction-specific information absent from the corpus. |
+
+The latest measured results and per-question failure analysis are in
+[`docs/evaluation-report.md`](evaluation-report.md). The timestamped JSON and CSV remain the detailed
+record for evidence, scores, citations, latency, and automated judgments.
+
+## Iterations tried and what changed
+
+1. The initial confidence threshold of `0.35` was replaced by a development-only calibration. A
+   stable development series produced the `0.802` operational default instead of tuning against the
+   final set.
+2. A retired public reranker was replaced with Nebius embedding-based cosine similarity. This kept
+   reranking provider-backed while retaining deterministic ordering and the established candidate
+   limits.
+3. Grounded-answer prompt version 2 replaced a format that allowed two sources inside one citation
+   bracket. Version 2 requires adjacent single-source citations so the validator can match each
+   title/page pair exactly.
+4. Prompt version 3 added explicit protection against reversing obligations and changing modal
+   strength after review found a reversed rule and an over-broad conditional conclusion.
+5. The most recent calibration/final-run pair demonstrated that a threshold near `0.846` can reject
+   relevant evidence whose score is only slightly lower. That run is retained as evidence of
+   confidence-gate sensitivity rather than being presented as a retrieval failure.
+
+## Learnings and observations
+
+- Retrieval success and answer success are different. The latest run achieved 100 percent
+  retrieval recall@4 while the confidence gate still refused four answerable questions.
+- Threshold calibration needs a healthy development set. If an answerable development question has
+  no usable score, the resulting threshold should not be promoted without investigation.
+- Automated faithfulness measures whether generated claims are supported; it does not detect an
+  omitted exception or qualification. Manual comparison with expected points remains necessary.
+- Valid citations prove that cited locations were retrieved, not that the response is complete.
+- Page-bounded chunks make citations easy to audit, but they can separate related rules across
+  pages; hybrid retrieval and cross-document evaluation are therefore necessary.
+- The latest p95 latency exceeded the target, so provider and generation latency must be improved or
+  the target formally revised before release.
+
 ## Material implementation decisions
 
 - Deterministic source publishing makes page citations and PDF hashes reviewable.
@@ -120,6 +198,17 @@ fixtures are never presented as provider-backed results.
 - Runtime resources are cached by non-secret configuration; credentials are passed only when the
   provider gateway is constructed.
 - The local index and timestamped evaluation runs are reproducible artifacts and are not committed.
+
+## Project evidence map
+
+| Evidence | Location |
+| --- | --- |
+| Working employee interface and setup instructions | [`README.md`](../README.md) and `app.py` |
+| Corpus sources and generated PDFs | `data/source/` and `data/policies/` |
+| Prompt and implementation decision history | [`docs/prompt-log.md`](prompt-log.md) |
+| Fixed 15-question results and failure analysis | [`docs/evaluation-report.md`](evaluation-report.md) |
+| Machine-readable evaluation evidence | `evaluation/runs/final/20261017T161604Z-final/` |
+| Stakeholder demonstration guide | [`docs/video-demo-script.md`](video-demo-script.md) |
 
 ## Policy governance and update process
 
