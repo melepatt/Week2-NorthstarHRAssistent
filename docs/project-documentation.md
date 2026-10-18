@@ -6,6 +6,7 @@
 > and operating procedures in this project are synthetic. The application is a technical
 > demonstration and must not be used for real employment, legal, benefits, tax, medical, or
 > investment decisions.
+> The application and synthetic policies are not approved for production or employee use.
 
 ## 1. Project overview
 
