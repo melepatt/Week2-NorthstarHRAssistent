@@ -1,75 +1,90 @@
 [
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-direct-benefit-start",
-    "status": "partial",
-    "notes": "The waiting-period rule and first-day exception are correct, but the answer omits that the enrollment system displays the actual coverage date."
+    "status": "fail",
+    "notes": "The Benefits Guide waiting-period rule, first-day exception, and enrollment-system date were retrieved at rank one, but the assistant refused the answerable question and supplied none of the expected points."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-direct-annual-pto",
     "status": "partial",
     "notes": "The 20-day allocation is correct, but the answer omits new-hire and final-year proration by full calendar month."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-direct-incident-deadline",
     "status": "pass",
     "notes": "The one-hour deadline, immediate reporting instruction, and prohibition on independent investigation match the cited evidence."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-direct-lodging-cap",
     "status": "partial",
     "notes": "The $250 cap is correct, but the answer omits the higher-rate approval path and approved conference-room-block exception."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-direct-vendor-gift",
     "status": "pass",
     "notes": "The approval threshold, cash-equivalent prohibition, and conflict conditions are supported by the cited evidence."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-direct-collaboration-hours",
     "status": "pass",
     "notes": "The hours and availability exceptions match the cited evidence."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-cross-parental-benefits",
     "status": "pass",
     "notes": "Duration, service requirement, benefits continuation, and employee contributions are complete and supported."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-cross-secure-travel",
     "status": "pass",
     "notes": "Security controls, reimbursable connectivity, and incident-reporting obligations are complete and supported across both policies."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-cross-remote-retaliation",
     "status": "partial",
     "notes": "Protection and reporting channels are correct, but the answer omits the expected remote information-security handling requirement."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-ambiguous-other-state",
     "status": "fail",
-    "notes": "The answer applies the manager-awareness rule to shorter stays without preserving that the rule applies only within an already approved state."
+    "notes": "The assistant refused even though the top-ranked evidence directly supports a conditional answer based on duration and approved state, including manager awareness for short-term in-state work and written approval for more than 30 days in another state."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-ambiguous-dinner",
-    "status": "pass",
-    "notes": "The answer correctly treats reimbursement as conditional and preserves the travel, business-purpose, documentation, and personal-expense rules."
+    "status": "fail",
+    "notes": "The assistant refused even though the top-ranked travel-policy evidence directly explains when a dinner may qualify, the $75 daily cap, and the personal or ordinary-meal exclusions."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-ambiguous-tomorrow-off",
     "status": "fail",
-    "notes": "The confidence gate refuses despite directly relevant evidence describing the clarification and approval path."
+    "notes": "The assistant refused even though the top-ranked leave-policy evidence directly describes the missing facts, manager-approval rule, sick-leave process, and protected-leave referral path."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-unanswerable-retirement-balance",
     "status": "pass",
     "notes": "The assistant correctly refuses because the corpus contains no individual account balance."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-unanswerable-tax-withholding",
     "status": "pass",
     "notes": "The assistant correctly refuses because the corpus contains no individual withholding calculation."
   },
   {
+    "run_id": "20261017T161604Z-final",
     "question_id": "final-unanswerable-final-pay",
     "status": "pass",
     "notes": "The assistant correctly refuses because the corpus does not provide a jurisdiction-specific final-pay deadline."

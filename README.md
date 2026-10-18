@@ -16,8 +16,8 @@ receive a deterministic refusal and are directed to People Operations.
 - The policy corpus contains synthetic company policy text and no real employee data.
 - Live Nebius model validation, indexing, and the fixed provider-backed evaluation have been run.
 - The latest final run met the automated retrieval, faithfulness, unanswerable-refusal, and citation
-  targets. It retained four confidence-gate false refusals, exceeded the p95 latency target, and
-  still requires run-specific manual review; see the evaluation report.
+  targets. Manual review recorded eight passes, three partial answers, and four confidence-gate
+  failures; the run also exceeded the p95 latency target. See the evaluation report.
 - Draft policy content must not be presented as effective policy.
 
 ## Delivery package

@@ -68,10 +68,10 @@ metadata before those runs can be reproduced from artifacts alone.
 
 ## Retrieval quality and failure analysis
 
-Retrieval succeeded on the expected-document criterion for all 15 questions, producing 100 percent
-recall@4. All three cross-document questions placed the required policies in the four evidence
-items and produced cited answers. All three unanswerable questions produced the intended refusal,
-even though retrieval returned semantically nearby policy pages.
+Retrieval succeeded on the expected-document criterion for all 12 answerable questions, producing
+100 percent recall@4. All three cross-document questions placed the required policies in the four
+evidence items and produced cited answers. All three unanswerable questions produced the intended
+refusal, even though retrieval returned semantically nearby policy pages.
 
 The four recorded failures occurred after relevant evidence had been retrieved. They are
 confidence-gate errors rather than missing-document retrieval errors:
@@ -94,17 +94,34 @@ eight-second limit. This is a performance failure, not a retrieval-quality failu
 
 ## Manual review status
 
-Manual evidence review for this exact run is pending. The file
-`evaluation/final_manual_reviews.json` predates this run and describes different answer/refusal
-outcomes, so its judgments are historical evidence and are not rolled into this report. A reviewer
-must compare each generated answer with its expected points and cited PDF pages, then record a new
-run-linked review before release.
+Manual evidence review for `20261017T161604Z-final` is complete. Comparison of each outcome with its
+expected points, retrieved policy text, and citations produced eight passes, three partial answers,
+and four failures. The run-linked review record is stored in
+`evaluation/final_manual_reviews.json`.
+
+| Question ID | Status | Manual finding |
+| --- | --- | --- |
+| `final-direct-benefit-start` | Fail | Relevant benefit-start evidence ranked first, but the confidence gate refused the answerable question. |
+| `final-direct-annual-pto` | Partial | Correctly states 20 days but omits new-hire and final-year proration. |
+| `final-direct-incident-deadline` | Pass | Deadline, immediate reporting, incident examples, and no-independent-investigation rule are supported. |
+| `final-direct-lodging-cap` | Partial | Correctly states the cap but omits higher-rate approval and the conference-room-block exception. |
+| `final-direct-vendor-gift` | Pass | Threshold, written approval, cash-equivalent prohibition, and conflict conditions are supported. |
+| `final-direct-collaboration-hours` | Pass | Collaboration hours and all expected availability exceptions are supported. |
+| `final-cross-parental-benefits` | Pass | Duration, service requirement, benefits continuation, and employee contributions are complete. |
+| `final-cross-secure-travel` | Pass | Security, reimbursement, and incident-reporting rules are complete across both policies. |
+| `final-cross-remote-retaliation` | Partial | Protection and reporting rules are correct, but secure information-handling obligations are omitted. |
+| `final-ambiguous-other-state` | Fail | Relevant conditional location rules were retrieved, but the confidence gate refused the question. |
+| `final-ambiguous-dinner` | Fail | Relevant conditional meal rules were retrieved, but the confidence gate refused the question. |
+| `final-ambiguous-tomorrow-off` | Fail | Relevant clarification and leave-process rules were retrieved, but the confidence gate refused the question. |
+| `final-unanswerable-retirement-balance` | Pass | Correct refusal; individual account balances are outside the corpus. |
+| `final-unanswerable-tax-withholding` | Pass | Correct refusal; employee-specific withholding cannot be calculated from the corpus. |
+| `final-unanswerable-final-pay` | Pass | Correct refusal; the corpus lacks a jurisdiction-specific final-pay deadline. |
 
 ## Release assessment
 
 This run meets the automated retrieval, faithfulness, unanswerable-refusal, and citation targets. It
-does not meet the latency target, it contains four false refusals caused by the confidence gate, and
-its current-run manual review is incomplete. The assistant and draft policy corpus therefore remain
-unapproved for employee reliance. Remediation should begin with development-set health checks and
-threshold review, followed by a fresh fixed-set run and manual evidence review; People Operations
-and Legal approval remains a separate release requirement.
+does not meet the latency target, and manual review confirms four false refusals plus three answers
+with missing qualifications. The assistant and draft policy corpus therefore remain unapproved for
+employee reliance. Remediation should begin with development-set health checks, confidence-threshold
+review, and prompt or answer-completeness improvements, followed by a fresh fixed-set run and manual
+evidence review; People Operations and Legal approval remains a separate release requirement.

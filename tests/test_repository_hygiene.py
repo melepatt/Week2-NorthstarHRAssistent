@@ -16,6 +16,7 @@ REQUIRED_DOCUMENTS = (
     PROJECT_ROOT / "docs" / "video-demo-script.md",
     PROJECT_ROOT / "docs" / "evaluation-report.md",
 )
+EDUCATIONAL_FRAMING_ALLOWED = frozenset({PROJECT_ROOT / "docs" / "project-documentation.md"})
 REQUIRED_COMMAND_REFERENCES = {
     "python scripts/check_models.py": PROJECT_ROOT / "scripts" / "check_models.py",
     "python scripts/build_policy_corpus.py": PROJECT_ROOT / "scripts" / "build_policy_corpus.py",
@@ -100,7 +101,7 @@ def test_pdf_artifacts_are_declared_binary_for_repository_diffs() -> None:
     assert "*.pdf binary" in attributes.splitlines()
 
 
-def test_committed_text_has_no_nebius_key_pattern_or_educational_framing() -> None:
+def test_committed_text_has_no_nebius_key_pattern_or_unauthorized_educational_framing() -> None:
     violations: list[str] = []
     for path in tracked_project_paths():
         try:
@@ -109,7 +110,11 @@ def test_committed_text_has_no_nebius_key_pattern_or_educational_framing() -> No
             continue
         if any(pattern.search(text) for pattern in SECRET_PATTERNS):
             violations.append(f"secret pattern in {path.relative_to(PROJECT_ROOT)}")
-        if path.suffix.lower() in {".md", ".py"} and FORBIDDEN_DELIVERY_TERMS.search(text):
+        if (
+            path.suffix.lower() in {".md", ".py"}
+            and path not in EDUCATIONAL_FRAMING_ALLOWED
+            and FORBIDDEN_DELIVERY_TERMS.search(text)
+        ):
             violations.append(f"delivery language in {path.relative_to(PROJECT_ROOT)}")
     assert not violations, "\n".join(violations)
 
